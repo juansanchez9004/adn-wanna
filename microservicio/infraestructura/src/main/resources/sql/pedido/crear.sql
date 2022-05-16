@@ -1,0 +1,1 @@
+insert into pedido(id_cliente, fecha, punto_entrega, valor_total, estado) values(:id_cliente, :fecha, :punto_entrega, :valor_total, :estado)
