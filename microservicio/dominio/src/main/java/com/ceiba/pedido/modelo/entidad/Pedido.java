@@ -35,6 +35,8 @@ public class Pedido {
 
     private BigDecimal valorTotal;
 
+    private BigDecimal valorSubTotal;
+
     private EstadoPedido estado;
 
     private List<ProductoOrdenado> productosOrdenados;
@@ -44,7 +46,8 @@ public class Pedido {
         this.puntoEntrega = puntoEntrega;
         this.productosOrdenados = new ArrayList<>(productosOrdenados);
         this.fecha = Calendar.getInstance().getTime();
-        this.valorTotal = calcularvalorTotal(productosOrdenados);
+        this.valorSubTotal = calcularvalorTotal(productosOrdenados);
+        this.valorTotal = this.valorSubTotal;
         aplicarCostoDomicilio();
         aplicarDescuentoDiasPorMes();
         aplicarDescuentoDiasSemanaPerfume(productosOrdenados);
@@ -60,7 +63,7 @@ public class Pedido {
     }
 
     private void aplicarCostoDomicilio() {
-        if(this.valorTotal.compareTo(VALOR_TOPE_COMPRA_PARA_DESCUENTO) > 0) {
+        if(this.valorSubTotal.compareTo(VALOR_TOPE_COMPRA_PARA_DESCUENTO) > 0) {
             this.valorTotal = this.valorTotal.add(calcularCostoDomicilioPorTopeCompra());
         } else {
             this.valorTotal = this.valorTotal.add(calcularCostoDomicilioComun());
@@ -86,16 +89,16 @@ public class Pedido {
     }
 
     private BigDecimal calcularCostoDomicilioComun() {
-        return this.valorTotal.multiply(PORCENTAJE_COSTO_DOMICILIO_COMUN);
+        return this.valorSubTotal.multiply(PORCENTAJE_COSTO_DOMICILIO_COMUN);
     }
 
     private BigDecimal calcularCostoDomicilioPorTopeCompra() {
-        return this.valorTotal.multiply(PORCENTAJE_COSTO_DOMICILIO_TOPE_COMPRA);
+        return this.valorSubTotal.multiply(PORCENTAJE_COSTO_DOMICILIO_TOPE_COMPRA);
     }
 
     private BigDecimal calcularCostoDescuentoDiasPorMes() {
         if(esDiaPermitidoParaDescuentoPorMes(DescomponerFecha.porDia(this.fecha))) {
-            return this.valorTotal.multiply(PORCENTAJE_DESCUENTO_PARA_DIAS_DEL_MES);
+            return this.valorSubTotal.multiply(PORCENTAJE_DESCUENTO_PARA_DIAS_DEL_MES);
         } else {
             return BigDecimal.ZERO;
         }
