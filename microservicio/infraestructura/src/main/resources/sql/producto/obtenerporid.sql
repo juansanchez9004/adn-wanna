@@ -1,3 +1,3 @@
 select id, nombre, tipo_producto, valor
-from pedido
+from producto
 where id = :id

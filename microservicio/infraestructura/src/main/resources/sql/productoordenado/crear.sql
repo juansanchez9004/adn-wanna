@@ -1,1 +1,1 @@
-insert producto_ordenado into (id, id_pedido, id_producto, valor_total, cantidad) values (:id, :id_pedido, :id_producto, :valor_total, :cantidad)
+insert into producto_ordenar (id_pedido, id_producto, valor_total, cantidad) values (:id_pedido, :id_producto, :valor_total, :cantidad)

@@ -16,7 +16,7 @@ public class DescomponerFecha {
     private DescomponerFecha() {}
 
     public static Integer porDia(Date fechaADescomponer) {
-        return convertirDateALocalDate(fechaADescomponer).getMonthValue();
+        return convertirDateALocalDate(fechaADescomponer).getDayOfMonth();
     }
 
     public static LocalDate convertirDateALocalDate(Date fechaAConvertir) {

@@ -106,9 +106,10 @@ public class Pedido {
     }
 
     private BigDecimal calcularCostoDescuentoDiasSemanaPerfume(List<ProductoOrdenado> productosOrdenados) {
-        if(costoTotalProductosTipoPerfume(productosOrdenados).compareTo(BigDecimal.ZERO) > 0
+        BigDecimal costoTotalProductoTipoPerfume = costoTotalProductosTipoPerfume(productosOrdenados);
+        if(costoTotalProductoTipoPerfume.compareTo(BigDecimal.ZERO) > 0
                 && esDiaSemanaPermitidoParaDescuentoPerfume(DescomponerFecha.porDiaDeSemana(this.fecha))) {
-            return this.valorTotal.multiply(PORCENTAJE_DESCUENTO_PARA_PRODUCTOS_PERFUME);
+            return costoTotalProductoTipoPerfume.multiply(PORCENTAJE_DESCUENTO_PARA_PRODUCTOS_PERFUME);
         } else {
             return BigDecimal.ZERO;
         }

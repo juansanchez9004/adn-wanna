@@ -16,9 +16,9 @@ create table pedido (
  id int(11) not null auto_increment,
  id_cliente int(11) not null,
  fecha date not null,
- direccion_entrega varchar(20) not null,
+ punto_entrega varchar(500) not null,
  valor_total DECIMAL(10,2) not null,
- estado varchar(20) not null,
+ estado varchar(30) not null,
  primary key (id)
 );
 
@@ -26,6 +26,7 @@ create table producto_ordenar (
  id int(11) not null auto_increment,
  id_pedido int(11) not null,
  id_producto int(11) not null,
+ valor_total DECIMAL(10,2) not null,
  cantidad int(11) not null,
  primary key (id)
 );

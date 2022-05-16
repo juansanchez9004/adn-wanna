@@ -42,7 +42,7 @@ public class RepositorioPedidoMySQL implements RepositorioPedido {
         parameterSource.addValue("fecha", pedido.getFecha());
         parameterSource.addValue("punto_entrega", pedido.getPuntoEntrega().entregaDomicilio());
         parameterSource.addValue("valor_total", pedido.getValorTotal());
-        parameterSource.addValue("estado", pedido.getEstado());
+        parameterSource.addValue("estado", pedido.getEstado().name());
         Long idPedidoGuardado = this.customNamedParameterJdbcTemplate.crear(parameterSource, sqlCrear);
         repositorioProductoOrdenado.guardarPorPedido(pedido, idPedidoGuardado);
         return idPedidoGuardado;
