@@ -25,6 +25,7 @@ public class FabricaSolicitudOrdenar {
 
     public SolicitudOrdenar crear(ComandoSolicitudOrdenar comandoSolicitudOrdenar) {
         return new SolicitudOrdenar(repositorioCliente.obtener(comandoSolicitudOrdenar.getIdCliente()),
+                comandoSolicitudOrdenar.getFecha(),
                 obtenerPuntoEntrega(comandoSolicitudOrdenar.getComandoPuntoEntrega()),
                 obtenerProductos(comandoSolicitudOrdenar.getComandoProductosOrdenados()));
     }

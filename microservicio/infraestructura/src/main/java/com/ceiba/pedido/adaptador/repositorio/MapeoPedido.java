@@ -33,7 +33,7 @@ public class MapeoPedido implements RowMapper<Pedido>, MapperResult {
         var valorTotal = resultSet.getBigDecimal("valor_Total");
         var estado = EstadoPedido.valueOf(resultSet.getString("estado"));
 
-        return Pedido.reconstruir(id, repositorioCliente.obtener(idCliente),
+        return Pedido.reconstruir(id, fecha, repositorioCliente.obtener(idCliente),
                 mapeoPuntoEntrega(puntoEntrega),
                 repositorioProductoOrdenado.obtenerPorPedido(id),
                 valorTotal, estado);

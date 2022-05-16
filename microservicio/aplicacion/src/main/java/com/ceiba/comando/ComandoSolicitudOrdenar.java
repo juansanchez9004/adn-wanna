@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,6 +15,8 @@ import java.util.List;
 public class ComandoSolicitudOrdenar {
 
     private Long idCliente;
+
+    private Date fecha;
 
     private ComandoPuntoEntrega comandoPuntoEntrega;
 

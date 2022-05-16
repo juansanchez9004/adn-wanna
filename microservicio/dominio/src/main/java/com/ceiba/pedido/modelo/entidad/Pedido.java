@@ -41,11 +41,11 @@ public class Pedido {
 
     private List<ProductoOrdenado> productosOrdenados;
 
-    private Pedido(Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados) {
+    private Pedido(Date fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados) {
         this.cliente = cliente;
         this.puntoEntrega = puntoEntrega;
         this.productosOrdenados = new ArrayList<>(productosOrdenados);
-        this.fecha = Calendar.getInstance().getTime();
+        this.fecha = (fecha == null ? Calendar.getInstance().getTime() : fecha);
         this.valorSubTotal = calcularvalorTotal(productosOrdenados);
         this.valorTotal = this.valorSubTotal;
         aplicarCostoDomicilio();
@@ -54,8 +54,9 @@ public class Pedido {
         this.estado = EstadoPedido.PENDIENTE;
     }
 
-    private Pedido(Long id, Cliente cliente, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
+    private Pedido(Long id, Date fecha, Cliente cliente, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
         this.id = id;
+        this.fecha = fecha;
         this.cliente = cliente;
         this.productosOrdenados = new ArrayList<>(productosOrdenados);
         this.valorTotal = valorTotal;
@@ -133,17 +134,17 @@ public class Pedido {
         ValidadorArgumento.validarObligatorio(solicitudOrdenar.getCliente(), "El cliente es requerido");
         ValidadorArgumento.validarObligatorio(solicitudOrdenar.getPuntoEntrega(), "El punto de entrega del pedido es requerido");
         ValidadorArgumento.validarNoVacio(solicitudOrdenar.getProductosOrdenados(), "No se puede crear un pedido sin productos");
-        return new Pedido(solicitudOrdenar.getCliente(), solicitudOrdenar.getPuntoEntrega(), solicitudOrdenar.getProductosOrdenados());
+        return new Pedido(solicitudOrdenar.getFecha(), solicitudOrdenar.getCliente(), solicitudOrdenar.getPuntoEntrega(), solicitudOrdenar.getProductosOrdenados());
     }
 
-    public static Pedido reconstruir(Long id, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
+    public static Pedido reconstruir(Long id, Date fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
         ValidadorArgumento.validarObligatorio(id, "El id es requerido para ordenar");
         ValidadorArgumento.validarObligatorio(cliente, "El cliente es requerido para ordenar");
         ValidadorArgumento.validarNoVacio(productosOrdenados, "No se puede crear un pedido sin productos");
         if(valorTotal.compareTo(BigDecimal.ZERO) <= 0) {
             throw new ExcepcionValorInvalido("El total a pagar no puede ser menor a cero");
         }
-        return new Pedido(id, cliente, productosOrdenados, valorTotal, estadoPedido);
+        return new Pedido(id, fecha, cliente, productosOrdenados, valorTotal, estadoPedido);
     }
 
     public Long getId() {
