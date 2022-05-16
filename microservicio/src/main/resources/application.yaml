@@ -6,7 +6,7 @@ jasypt:
 server:
    port: 8090
    servlet:
-      context-path: /pedido
+      context-path: /orden
       session:
          timeout: 21600s
 springdoc:
