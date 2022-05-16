@@ -28,9 +28,9 @@ public class MapeoPedido implements RowMapper<Pedido>, MapperResult {
     public Pedido mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         var id = resultSet.getLong("id");
         var idCliente = resultSet.getLong("id_cliente");
-        var fecha = resultSet.getLong("fecha");
+        var fecha = resultSet.getDate("fecha");
         var puntoEntrega = resultSet.getString("punto_entrega");
-        var valorTotal = resultSet.getBigDecimal("valorTotal");
+        var valorTotal = resultSet.getBigDecimal("valor_Total");
         var estado = EstadoPedido.valueOf(resultSet.getString("estado"));
 
         return Pedido.reconstruir(id, repositorioCliente.obtener(idCliente),

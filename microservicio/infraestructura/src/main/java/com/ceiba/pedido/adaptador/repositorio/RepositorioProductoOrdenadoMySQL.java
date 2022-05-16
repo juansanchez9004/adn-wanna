@@ -39,7 +39,7 @@ public class RepositorioProductoOrdenadoMySQL implements RepositorioProductoOrde
     @Override
     public List<ProductoOrdenado> obtenerPorPedido(Long idPedido) {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", idPedido);
+        parameterSource.addValue("id_pedido", idPedido);
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
                 .query(sqlObtenerPorPedido, parameterSource, mapeoProductoOrdenado);
     }
