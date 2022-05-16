@@ -41,12 +41,6 @@ public class ProductoOrdenado {
         return new ProductoOrdenado(producto, cantidad);
     }
 
-    public static ProductoOrdenado reconstruir(Long id, Producto producto, Integer cantidad) {
-        ValidadorArgumento.validarObligatorio(producto, "Producto es requerido");
-        ValidadorArgumento.validarObligatorio(cantidad, "Cantidad es requerida");
-        return new ProductoOrdenado(id, producto, cantidad);
-    }
-
     public static ProductoOrdenado reconstruir(Long id, Producto producto, Integer cantidad, BigDecimal valorTotal) {
         ValidadorArgumento.validarObligatorio(producto, "Producto es requerido");
         ValidadorArgumento.validarObligatorio(cantidad, "Cantidad es requerida");

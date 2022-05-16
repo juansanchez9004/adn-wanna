@@ -25,7 +25,7 @@ public class Producto {
         ValidadorArgumento.validarObligatorio(id, "Id del producto es requerido");
         ValidadorArgumento.validarObligatorio(nombre, "Nombre del producto es requerido");
         ValidadorArgumento.validarObligatorio(tipoProducto, "Tipo Producto es requerido");
-        ValidadorArgumento.validarObligatorio(id, "Id del producto es requerido");
+        ValidadorArgumento.validarObligatorio(valor, "El valor del producto es requerido");
         return new Producto(id, nombre, tipoProducto, valor);
     }
 
