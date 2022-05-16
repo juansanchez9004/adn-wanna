@@ -15,7 +15,7 @@ create table producto (
 create table pedido (
  id int(11) not null auto_increment,
  id_cliente int(11) not null,
- fecha date not null;
+ fecha date not null,
  direccion_entrega varchar(20) not null,
  valor_total DECIMAL(10,2) not null,
  estado varchar(20) not null,
