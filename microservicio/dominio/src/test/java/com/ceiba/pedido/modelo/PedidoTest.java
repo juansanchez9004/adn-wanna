@@ -18,8 +18,275 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 public class PedidoTest {
+
+    @Test
+    void calcularValorTotalExitoso() {
+
+        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
+                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 54 # 90 - 45")
+                .conMunicipio("Itagui")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoCosmetico = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(3)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(25800))
+                        .conTipoProducto(TipoProducto.COSMETICO).conNombre("Kit de limpieza facial 100ml")
+                        .reconstruir())
+                .build();
+
+        ProductoOrdenado productoOrdenadoTipoReloj = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(2)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(357000))
+                        .conTipoProducto(TipoProducto.RELOJ).conNombre("Mont Blanc Legend Eau de Parfum")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoCosmetico)
+                .conProducto(productoOrdenadoTipoReloj)
+                .crear();
+
+        var valorTotalPedido = pedido.calcularValorTotal(pedido.getProductosOrdenados());
+
+        Assertions.assertEquals(BigDecimal.valueOf(791400).longValue(), valorTotalPedido.longValue());
+    }
+
+    @Test
+    void calcularCostoDomicilio10Porciento() {
+
+        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
+                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 54 # 90 - 45")
+                .conMunicipio("Itagui")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoCosmetico = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(5)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(100000))
+                        .conTipoProducto(TipoProducto.COSMETICO).conNombre("Kit de limpieza facial 100ml")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoCosmetico)
+                .crear();
+
+        var costoDomicilioComun = pedido.calcularCostoDomicilioComun();
+
+        Assertions.assertEquals(BigDecimal.valueOf(50000).longValue(), costoDomicilioComun.longValue());
+    }
+
+    @Test
+    void calcularCostoDomicilio5Porciento() {
+
+        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
+                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 54 # 90 - 45")
+                .conMunicipio("Itagui")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoCosmetico = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(3)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(500000))
+                        .conTipoProducto(TipoProducto.COSMETICO).conNombre("Kit de limpieza facial 100ml")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoCosmetico)
+                .crear();
+
+        var costoDomicilioEspecial = pedido.calcularCostoDomicilioPorTopeCompra();
+
+        Assertions.assertEquals(BigDecimal.valueOf(75000).longValue(), costoDomicilioEspecial.longValue());
+    }
+
+    @Test
+    void calcularCostoDescuentoDiasPorMes() {
+
+        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 20)
+                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 54 # 90 - 45")
+                .conMunicipio("Itagui")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoCosmetico = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(3)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(500000))
+                        .conTipoProducto(TipoProducto.COSMETICO).conNombre("Kit de limpieza facial 100ml")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoCosmetico)
+                .crear();
+
+        var costoDescuentoDeDiasPorMes = pedido.calcularCostoDescuentoDiasPorMes();
+
+        Assertions.assertEquals(BigDecimal.valueOf(180000).longValue(), costoDescuentoDeDiasPorMes.longValue());
+    }
+
+    @Test
+    void calcularCostoDescuentoDiasSemanaPerfume() {
+
+        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 16)
+                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 54 # 90 - 45")
+                .conMunicipio("Itagui")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeAmber = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(2)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(515000))
+                        .conTipoProducto(TipoProducto.PERFUME).conNombre("Amber Out Edition Golden")
+                        .reconstruir())
+                .build();
+
+        ProductoOrdenado productoOrdenadoTipoCosmetico = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(3)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(500000))
+                        .conTipoProducto(TipoProducto.COSMETICO).conNombre("Kit de limpieza facial 100ml")
+                        .reconstruir())
+                .build();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeMontBlank = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(2)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(515000))
+                        .conTipoProducto(TipoProducto.PERFUME).conNombre("Mont Blank Edition Fire")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoPerfumeAmber)
+                .conProducto(productoOrdenadoTipoCosmetico)
+                .conProducto(productoOrdenadoTipoPerfumeMontBlank)
+                .crear();
+
+        var costoDescuentoDiasSemanaPerfume = pedido.calcularCostoDescuentoDiasSemanaPerfume(pedido.getProductosOrdenados());
+
+        Assertions.assertEquals(BigDecimal.valueOf(103000).longValue(), costoDescuentoDiasSemanaPerfume.longValue());
+    }
+
+    @Test
+    void calcularCostoTotalProductosTipoPerfume() {
+
+        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 18)
+                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 54 # 90 - 45")
+                .conMunicipio("Itagui")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeAmber = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(2)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(515000))
+                        .conTipoProducto(TipoProducto.PERFUME).conNombre("Amber Out Edition Golden")
+                        .reconstruir())
+                .build();
+
+        ProductoOrdenado productoOrdenadoTipoCosmetico = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(3)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(500000))
+                        .conTipoProducto(TipoProducto.COSMETICO).conNombre("Kit de limpieza facial 100ml")
+                        .reconstruir())
+                .build();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeMontBlank = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(3)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(418000))
+                        .conTipoProducto(TipoProducto.PERFUME).conNombre("Mont Blank Edition Fire")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoPerfumeAmber)
+                .conProducto(productoOrdenadoTipoCosmetico)
+                .conProducto(productoOrdenadoTipoPerfumeMontBlank)
+                .crear();
+
+        var costoTotalProductosTipoPerfume = pedido.costoTotalProductosTipoPerfume(pedido.getProductosOrdenados());
+
+        Assertions.assertEquals(BigDecimal.valueOf(2284000).longValue(), costoTotalProductosTipoPerfume.longValue());
+    }
 
     @Test
     void deberiaReconstruirElPedidoConEstadoCanceladoExitosamente() {

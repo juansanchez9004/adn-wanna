@@ -4,7 +4,6 @@ import com.ceiba.cliente.ClienteTestDataBuilder;
 import com.ceiba.cliente.entidad.Cliente;
 import com.ceiba.pedido.modelo.ProductoOrdenadoTestDataBuilder;
 import com.ceiba.pedido.modelo.PuntoEntregaTestDataBuilder;
-import com.ceiba.pedido.modelo.SolicitudOrdenarTestDataBuilder;
 import com.ceiba.pedido.modelo.entidad.Pedido;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.modelo.entidad.PuntoEntrega;

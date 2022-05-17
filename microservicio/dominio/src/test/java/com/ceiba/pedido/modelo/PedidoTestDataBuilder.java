@@ -6,6 +6,7 @@ import com.ceiba.pedido.modelo.entidad.EstadoPedido;
 import com.ceiba.pedido.modelo.entidad.Pedido;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.modelo.entidad.PuntoEntrega;
+import com.ceiba.pedido.servicio.SolicitudOrdenarTestDataBuilder;
 import com.ceiba.producto.ProductoTestDataBuilder;
 
 import java.math.BigDecimal;

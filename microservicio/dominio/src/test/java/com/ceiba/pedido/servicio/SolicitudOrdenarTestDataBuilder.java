@@ -1,4 +1,4 @@
-package com.ceiba.pedido.modelo;
+package com.ceiba.pedido.servicio;
 
 import com.ceiba.cliente.entidad.Cliente;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
