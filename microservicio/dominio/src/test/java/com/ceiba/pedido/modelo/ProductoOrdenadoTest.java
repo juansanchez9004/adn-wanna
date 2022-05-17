@@ -6,10 +6,9 @@ import com.ceiba.producto.ProductoTestDataBuilder;
 import com.ceiba.producto.entidad.TipoProducto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 
-public class ProductoOrdenadoTest {
+class ProductoOrdenadoTest {
 
     @Test
     void deberiaCrearExitoso() {

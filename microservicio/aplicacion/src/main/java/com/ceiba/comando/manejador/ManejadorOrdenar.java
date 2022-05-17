@@ -3,7 +3,6 @@ package com.ceiba.comando.manejador;
 import com.ceiba.ComandoRespuesta;
 import com.ceiba.comando.ComandoSolicitudOrdenar;
 import com.ceiba.comando.fabrica.FabricaSolicitudOrdenar;
-import com.ceiba.manejador.ManejadorComando;
 import com.ceiba.manejador.ManejadorComandoRespuesta;
 import com.ceiba.pedido.servicio.ServicioOrdenar;
 import org.springframework.stereotype.Component;

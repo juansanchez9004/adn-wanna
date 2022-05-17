@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class ProductoTest {
+class ProductoTest {
 
     @Test
     void deberiaReconstruirProductoExitosamente() {

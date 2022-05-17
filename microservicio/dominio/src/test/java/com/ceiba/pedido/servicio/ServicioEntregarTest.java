@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class ServicioEntregarTest {
+class ServicioEntregarTest {
 
     @Test
     void deberiaEntregarPedidoExitosamente() {

@@ -5,7 +5,6 @@ import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.pedido.modelo.entidad.Pedido;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.puerto.repositorio.RepositorioProductoOrdenado;
-import com.ceiba.producto.adaptador.repositorio.RepositorioProductoMySQL;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Repository;
 

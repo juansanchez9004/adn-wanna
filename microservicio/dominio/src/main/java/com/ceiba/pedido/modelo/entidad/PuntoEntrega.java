@@ -1,7 +1,6 @@
 package com.ceiba.pedido.modelo.entidad;
 
 import com.ceiba.dominio.ValidadorArgumento;
-import com.ceiba.producto.entidad.Producto;
 
 public class PuntoEntrega {
 

@@ -2,14 +2,12 @@ package com.ceiba.cliente;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
-import com.ceiba.producto.ProductoTestDataBuilder;
-import com.ceiba.producto.entidad.TipoProducto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-public class ClienteTest {
+class ClienteTest {
 
     @Test
     void deberiaReconstruirClienteExitosamente() {

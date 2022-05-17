@@ -6,7 +6,6 @@ import com.ceiba.dominio.ValidadorArgumento;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.*;
 
 public class Pedido {
@@ -17,11 +16,11 @@ public class Pedido {
 
     public static final BigDecimal VALOR_TOPE_COMPRA_PARA_DESCUENTO = BigDecimal.valueOf(1200000);
 
-    public static final List<Integer> DIAS_DEL_MES_PARA_DESCUENTO = Arrays.asList(10, 20);
+    protected static final List<Integer> DIAS_DEL_MES_PARA_DESCUENTO = Arrays.asList(10, 20);
 
     public static final BigDecimal PORCENTAJE_DESCUENTO_PARA_DIAS_DEL_MES = BigDecimal.valueOf(0.12);
 
-    public static final List<Integer> DIAS_DE_SEMANA_PARA_DESCUENTO_PERFUMES = Arrays.asList(1, 2); // 1 Lunes - 2 Martes
+    protected static final List<Integer> DIAS_DE_SEMANA_PARA_DESCUENTO_PERFUMES = Arrays.asList(1, 2); // 1 Lunes - 2 Martes
 
     public static final BigDecimal PORCENTAJE_DESCUENTO_PARA_PRODUCTOS_PERFUME = BigDecimal.valueOf(0.05);
 

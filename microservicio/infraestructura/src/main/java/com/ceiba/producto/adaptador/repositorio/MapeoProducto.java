@@ -4,8 +4,6 @@ import com.ceiba.infraestructura.jdbc.MapperResult;
 import com.ceiba.producto.entidad.Producto;
 import com.ceiba.producto.entidad.TipoProducto;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
