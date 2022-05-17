@@ -46,7 +46,7 @@ public class Pedido {
         this.puntoEntrega = puntoEntrega;
         this.productosOrdenados = new ArrayList<>(productosOrdenados);
         this.fecha = (fecha == null ? Calendar.getInstance().getTime() : fecha);
-        this.valorSubTotal = calcularvalorTotal(productosOrdenados);
+        this.valorSubTotal = calcularValorTotal(productosOrdenados);
         this.valorTotal = this.valorSubTotal;
         aplicarCostoDomicilio();
         aplicarDescuentoDiasPorMes();
@@ -83,21 +83,21 @@ public class Pedido {
         this.estado = EstadoPedido.ENTREGADO;
     }
 
-    private BigDecimal calcularvalorTotal(List<ProductoOrdenado> productosOrdenados) {
+    public BigDecimal calcularValorTotal(List<ProductoOrdenado> productosOrdenados) {
         return productosOrdenados.stream()
                 .map(productoOrdenado -> productoOrdenado.getValorTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private BigDecimal calcularCostoDomicilioComun() {
+    public BigDecimal calcularCostoDomicilioComun() {
         return this.valorSubTotal.multiply(PORCENTAJE_COSTO_DOMICILIO_COMUN);
     }
 
-    private BigDecimal calcularCostoDomicilioPorTopeCompra() {
+    public BigDecimal calcularCostoDomicilioPorTopeCompra() {
         return this.valorSubTotal.multiply(PORCENTAJE_COSTO_DOMICILIO_TOPE_COMPRA);
     }
 
-    private BigDecimal calcularCostoDescuentoDiasPorMes() {
+    public BigDecimal calcularCostoDescuentoDiasPorMes() {
         if(esDiaPermitidoParaDescuentoPorMes(DescomponerFecha.porDia(this.fecha))) {
             return this.valorSubTotal.multiply(PORCENTAJE_DESCUENTO_PARA_DIAS_DEL_MES);
         } else {
@@ -109,7 +109,7 @@ public class Pedido {
         return DIAS_DEL_MES_PARA_DESCUENTO.stream().anyMatch(diaDescuento -> diaDescuento.equals(dia));
     }
 
-    private BigDecimal calcularCostoDescuentoDiasSemanaPerfume(List<ProductoOrdenado> productosOrdenados) {
+    public BigDecimal calcularCostoDescuentoDiasSemanaPerfume(List<ProductoOrdenado> productosOrdenados) {
         BigDecimal costoTotalProductoTipoPerfume = costoTotalProductosTipoPerfume(productosOrdenados);
         if(costoTotalProductoTipoPerfume.compareTo(BigDecimal.ZERO) > 0
                 && esDiaSemanaPermitidoParaDescuentoPerfume(DescomponerFecha.porDiaDeSemana(this.fecha))) {
@@ -119,7 +119,7 @@ public class Pedido {
         }
     }
 
-    private BigDecimal costoTotalProductosTipoPerfume(List<ProductoOrdenado> productosOrdenados) {
+    public BigDecimal costoTotalProductosTipoPerfume(List<ProductoOrdenado> productosOrdenados) {
         return productosOrdenados.stream()
                 .filter(productoOrdenado ->  productoOrdenado.getProducto().esTipoPermufe())
                 .map(productoTipoPerfume -> productoTipoPerfume.getValorTotal())

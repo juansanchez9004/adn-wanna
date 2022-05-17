@@ -15,13 +15,6 @@ public class ProductoOrdenado {
 
     private final BigDecimal valorTotal;
 
-    private ProductoOrdenado(Long id, Producto producto, Integer cantidad) {
-        this.id = id;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.valorTotal = calcularValorTotal(producto, cantidad);
-    }
-
     private ProductoOrdenado(Long id, Producto producto, Integer cantidad, BigDecimal valorTotal) {
         this.id = id;
         this.producto = producto;
