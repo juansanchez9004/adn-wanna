@@ -11,6 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Date;
+
 import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -33,6 +35,8 @@ class ConsultaControladorPedidoTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$[0].id", is(3)))
                 .andExpect(jsonPath("$[0].valorTotal", is(1071525.0)))
+                .andExpect(jsonPath("$[0].fecha", is("2022-05-16")))
+                .andExpect(jsonPath("$[0].sitioEntrega", is("Calle 90 c # 584 - Envigado")))
                 .andExpect(jsonPath("$[0].estado", is("ENTREGADO")));
     }
 }
