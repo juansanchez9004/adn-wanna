@@ -8,7 +8,7 @@ import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class Pedido {
+public final class Pedido {
 
     public static final BigDecimal PORCENTAJE_COSTO_DOMICILIO_COMUN = BigDecimal.valueOf(0.10);
 
@@ -84,7 +84,7 @@ public class Pedido {
 
     public BigDecimal calcularValorTotal(List<ProductoOrdenado> productosOrdenados) {
         return productosOrdenados.stream()
-                .map(productoOrdenado -> productoOrdenado.getValorTotal())
+                .map(ProductoOrdenado::getValorTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
@@ -121,7 +121,7 @@ public class Pedido {
     public BigDecimal costoTotalProductosTipoPerfume(List<ProductoOrdenado> productosOrdenados) {
         return productosOrdenados.stream()
                 .filter(productoOrdenado ->  productoOrdenado.getProducto().esTipoPermufe())
-                .map(productoTipoPerfume -> productoTipoPerfume.getValorTotal())
+                .map(ProductoOrdenado::getValorTotal)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 

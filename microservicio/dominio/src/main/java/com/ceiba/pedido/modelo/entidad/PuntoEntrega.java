@@ -2,7 +2,7 @@ package com.ceiba.pedido.modelo.entidad;
 
 import com.ceiba.dominio.ValidadorArgumento;
 
-public class PuntoEntrega {
+public final class PuntoEntrega {
 
     private final String direccion;
 

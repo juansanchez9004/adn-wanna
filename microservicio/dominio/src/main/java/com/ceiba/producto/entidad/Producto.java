@@ -4,7 +4,7 @@ import com.ceiba.dominio.ValidadorArgumento;
 
 import java.math.BigDecimal;
 
-public class Producto {
+public final class Producto {
 
     private Long id;
 

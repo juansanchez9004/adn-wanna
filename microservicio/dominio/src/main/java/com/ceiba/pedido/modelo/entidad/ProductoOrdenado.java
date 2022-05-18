@@ -5,7 +5,7 @@ import com.ceiba.producto.entidad.Producto;
 
 import java.math.BigDecimal;
 
-public class ProductoOrdenado {
+public final class ProductoOrdenado {
 
     private Long id;
 

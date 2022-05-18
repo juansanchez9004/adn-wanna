@@ -2,7 +2,7 @@ package com.ceiba.cliente.entidad;
 
 import com.ceiba.dominio.ValidadorArgumento;
 
-public class Cliente {
+public final class Cliente {
 
     private Long id;
     private final String nombre;
