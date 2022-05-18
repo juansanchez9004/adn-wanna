@@ -1,5 +1,6 @@
 @Library('ceiba-jenkins-library') _
 pipeline {
+
     //Donde se va a ejecutar el Pipeline
     agent {
         label 'Slave_Induccion'
@@ -40,7 +41,6 @@ pipeline {
                         sonarKey:'co.com.ceiba.adn:wanna.pablo.tabares',
                         sonarName:'CeibaADN-wanna(pablo.tabares)',
                         sonarPathProperties:'./sonar-project.properties')
-                }
             }
         }
 
