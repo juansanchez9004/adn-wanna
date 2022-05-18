@@ -1,4 +1,4 @@
-@Library('ceiba-jenkins-library') _
+@Library('ceiba-jenkins-library@master') _
 pipeline {
 
     //Donde se va a ejecutar el Pipeline
