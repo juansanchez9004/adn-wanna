@@ -58,16 +58,17 @@ pipeline {
     post {
         success {
             echo 'This will run only if successful'
-            junit 'build/test-results/test/*.xml'
+            updateGitlabCommitStatus name: 'IC Jenkins', state: 'success'
         }
 
         failure {
             echo 'This will run only if failed'
             mail (
                     to: 'pablo.tabares@ceiba.com.co',
-                    subject: "Failed Pipeline:${currentBuild.fullDisplayName}",
-                    body: "Something is wrong with ${env.BUILD_URL}"
+                    subject: 'ERROR CI: ${env.JOB_NAME}',
+                    body: 'Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build'
             )
+            updateGitlabCommitStatus name: 'IC Jenkins', state: 'failed'
         }
     }
 }
