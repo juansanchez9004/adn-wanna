@@ -1,71 +1,79 @@
-@Library('ceiba-jenkins-library@master') _
+@Library('ceiba-jenkins-library') _
 pipeline {
-
-  agent {
-    label 'Slave_Induccion'
-  }
-
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '3'))
- 	disableConcurrentBuilds()
-  }
-
-  tools {
-    jdk 'JDK17_Centos'
-  }
-
-  stages{
-    stage('Checkout') {
-      steps{
-        echo "------------>Checkout desde GIT<------------"
-      }
+    //Donde se va a ejecutar el Pipeline
+    agent {
+        label 'Slave_Induccion'
     }
 
-    stage('Compile & Unit Tests') {
-      steps{
-        echo "------------>Clean Tests<------------"
-
-        sh 'chmod +x ./microservicio/gradlew'
-        sh './microservicio/gradlew --b ./microservicio/build.gradle clean'
-
-        echo "------------>compile & Unit Tests<------------"
-
-        sh 'chmod +x ./microservicio/gradlew'
-        sh './microservicio/gradlew --b ./microservicio/build.gradle test'
-
-      }
+    //Opciones específicas de Pipeline dentro del Pipeline
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '3'))
+        disableConcurrentBuilds()
     }
 
-    stage('Static Code Analysis') {
-      steps{
-        echo '------------>Análisis de código estático<------------'
-        sonarqubeMasQualityGatesP(
-            sonarKey:'co.com.ceiba:adn:wanna.pablo.tabares',
-            sonarName:'''"CeibaADN-wanna(pablo.tabares)"''',
-            sonarPathProperties:'./sonar-project.properties'
-        )
-      }
+    //Una sección que define las herramientas “preinstaladas” en Jenkins
+    tools {
+        jdk 'JDK17_Centos' //Verisión preinstalada en la Configuración del Master
     }
 
-    stage('Build') {
-      steps {
-        echo "------------>Build<------------"
-        sh './microservicio/gradlew --b ./microservicio/build.gradle build -x test'
-      }
-    }
-  }
+    //Aquí comienzan los “items” del Pipeline
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "------------>Checkout<------------"
+            }
+        }
 
-  post {
-    failure {
-        mail(
-            to: 'pablo.tabares@ceiba.com.co',
-            body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
-            subject: "ERROR CI: ${env.JOB_NAME}"
-        )
-        updateGitlabCommitStatus name: 'IC Jenkins', state: 'failed'
+        stage('Compile & Unit Tests') {
+            steps {
+                echo "------------>Compile & Unit Tests<------------"
+                sh 'chmod +x gradlew'
+                sh './gradlew --b ./build.gradle test'
+
+            }
+        }
+
+        stage('Static Code Analysis') {
+            steps {
+                echo "------------>Análisis de código estático<------------"
+                sonarqubeMasQualityGatesP(
+                        sonarKey:'co.com.ceiba.adn:wanna.pablo.tabares',
+                        sonarName:'CeibaADN-wanna(pablo.tabares)',
+                        sonarPathProperties:'./sonar-project.properties')
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "------------>Build<------------"
+                sh './gradlew --b ./build.gradle build -x test'
+            }
+        }
     }
-    success {
-        updateGitlabCommitStatus name: 'IC Jenkins', state: 'success'
+
+    post {
+        always {
+          echo 'This will always run'
+        }
+        success {
+            echo 'This will run only if successful'
+            junit 'build/test-results/test/*.xml'
+        }
+        failure {
+            echo 'This will run only if failed'
+            mail (
+                    to: 'pablo.tabares@ceiba.com.co',
+                    subject: "Failed Pipeline:${currentBuild.fullDisplayName}",
+                    body: "Something is wrong with ${env.BUILD_URL}"
+            )
+        }
+        unstable {
+          echo 'This will run only if the run was marked as unstable'
+        }
+        changed {
+          echo 'This will run only if the state of the Pipeline has changed'
+          echo 'For example, if the Pipeline was previously failing but is now successful'
+        }
     }
-  }
 }
