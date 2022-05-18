@@ -42,7 +42,7 @@ pipeline {
                 echo "------------>Análisis de código estático<------------"
                 sonarqubeMasQualityGatesP(
                         sonarKey:'co.com.ceiba.adn:wanna.pablo.tabares',
-                        sonarName:'CeibaADN-wanna(pablo.tabares)',
+                        sonarName:'''"CeibaADN-wanna(pablo.tabares)"''',
                         sonarPathProperties:'./sonar-project.properties')
             }
         }
