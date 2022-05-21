@@ -6,7 +6,7 @@ jasypt:
 server:
    port: 8090
    servlet:
-      context-path: /orden
+      context-path: /wanna
       session:
          timeout: 21600s
 springdoc:
