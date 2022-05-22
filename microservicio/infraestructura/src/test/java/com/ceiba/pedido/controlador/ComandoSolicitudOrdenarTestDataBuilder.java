@@ -34,6 +34,6 @@ public class ComandoSolicitudOrdenarTestDataBuilder {
     }
 
     public ComandoSolicitudOrdenar build() {
-        return new ComandoSolicitudOrdenar(this.idCliente, this.fecha, comandoPuntoEntrega, comandoProductosOrdenados);
+        return new ComandoSolicitudOrdenar(this.idCliente, this.fecha, this.comandoPuntoEntrega, this.comandoProductosOrdenados);
     }
 }
