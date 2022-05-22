@@ -6,6 +6,7 @@ import com.ceiba.dominio.ValidadorArgumento;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.*;
 
 public final class Pedido {
@@ -28,7 +29,7 @@ public final class Pedido {
 
     private Cliente cliente;
 
-    private Date fecha;
+    private LocalDate fecha;
 
     private PuntoEntrega puntoEntrega;
 
@@ -40,11 +41,11 @@ public final class Pedido {
 
     private List<ProductoOrdenado> productosOrdenados;
 
-    private Pedido(Date fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados) {
+    private Pedido(LocalDate fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados) {
         this.cliente = cliente;
         this.puntoEntrega = puntoEntrega;
         this.productosOrdenados = new ArrayList<>(productosOrdenados);
-        this.fecha = (fecha == null ? Calendar.getInstance().getTime() : fecha);
+        this.fecha = (fecha == null ? LocalDate.now() : fecha);
         this.valorSubTotal = calcularValorTotal(productosOrdenados);
         this.valorTotal = this.valorSubTotal;
         aplicarCostoDomicilio();
@@ -53,7 +54,7 @@ public final class Pedido {
         this.estado = EstadoPedido.PENDIENTE;
     }
 
-    private Pedido(Long id, Date fecha, Cliente cliente, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
+    private Pedido(Long id, LocalDate fecha, Cliente cliente, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
         this.id = id;
         this.fecha = fecha;
         this.cliente = cliente;
@@ -136,7 +137,7 @@ public final class Pedido {
         return new Pedido(solicitudOrdenar.getFecha(), solicitudOrdenar.getCliente(), solicitudOrdenar.getPuntoEntrega(), solicitudOrdenar.getProductosOrdenados());
     }
 
-    public static Pedido reconstruir(Long id, Date fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
+    public static Pedido reconstruir(Long id, LocalDate fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
         ValidadorArgumento.validarObligatorio(id, "El id es requerido para ordenar");
         ValidadorArgumento.validarObligatorio(cliente, "El cliente es requerido para ordenar");
         ValidadorArgumento.validarNoVacio(productosOrdenados, "No se puede crear un pedido sin productos");
@@ -154,7 +155,7 @@ public final class Pedido {
         return cliente;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 

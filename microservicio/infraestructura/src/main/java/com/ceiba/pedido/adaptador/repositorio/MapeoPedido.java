@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Component
 public class MapeoPedido implements RowMapper<Pedido>, MapperResult {
@@ -28,7 +30,7 @@ public class MapeoPedido implements RowMapper<Pedido>, MapperResult {
     public Pedido mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         var id = resultSet.getLong("id");
         var idCliente = resultSet.getLong("id_cliente");
-        var fecha = resultSet.getDate("fecha");
+        var fecha = resultSet.getDate("fecha").toLocalDate();
         var puntoEntrega = resultSet.getString("punto_entrega");
         var valorTotal = resultSet.getBigDecimal("valor_Total");
         var estado = EstadoPedido.valueOf(resultSet.getString("estado"));

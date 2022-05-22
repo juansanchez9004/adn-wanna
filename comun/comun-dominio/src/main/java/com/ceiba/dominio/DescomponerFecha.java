@@ -8,15 +8,11 @@ public class DescomponerFecha {
 
     private DescomponerFecha() {}
 
-    public static Integer porDia(Date fechaADescomponer) {
-        return convertirDateALocalDate(fechaADescomponer).getDayOfMonth();
+    public static Integer porDia(LocalDate fechaADescomponer) {
+        return fechaADescomponer.getDayOfMonth();
     }
 
-    public static LocalDate convertirDateALocalDate(Date fechaAConvertir) {
-        return LocalDate.ofInstant(fechaAConvertir.toInstant(), ZoneId.systemDefault());
-    }
-
-    public static Integer porDiaDeSemana(Date fechaADescomponer) {
-        return convertirDateALocalDate(fechaADescomponer).getDayOfWeek().getValue();
+    public static Integer porDiaDeSemana(LocalDate fechaADescomponer) {
+        return fechaADescomponer.getDayOfWeek().getValue();
     }
 }
