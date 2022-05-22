@@ -24,8 +24,7 @@ class PedidoTest {
     @Test
     void calcularValorTotalExitoso() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -70,8 +69,7 @@ class PedidoTest {
     @Test
     void calcularCostoDomicilio10Porciento() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -106,8 +104,7 @@ class PedidoTest {
     @Test
     void calcularCostoDomicilio5Porciento() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -142,8 +139,7 @@ class PedidoTest {
     @Test
     void calcularCostoDescuentoDiasPorMes() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 20)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 20);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -178,8 +174,7 @@ class PedidoTest {
     @Test
     void calcularCostoDescuentoDiasSemanaPerfume() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 16)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 16);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -234,8 +229,7 @@ class PedidoTest {
     @Test
     void calcularCostoTotalProductosTipoPerfume() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 18)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 18);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -290,8 +284,7 @@ class PedidoTest {
     @Test
     void deberiaReconstruirElPedidoConEstadoCanceladoExitosamente() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -332,8 +325,7 @@ class PedidoTest {
     @Test
     void deberiaCrearElPedidoCorrectamenteConProductosTipoPerfumeSinDescuentoDiaMes() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                            .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
                 .conDireccion("Calle 54 # 90 - 45")
@@ -370,8 +362,7 @@ class PedidoTest {
     @Test
     void deberiaCrearElPedidoCorrectamenteConProductosTipoPerfumeConDescuentoDiaMes() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 16)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 16);
 
         PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
                 .conDireccion("Calle 54 # 90 - 45")
@@ -408,8 +399,7 @@ class PedidoTest {
     @Test
     void deberiaCrearElPedidoCorrectamenteConDiferentesProductosYDomicilioDel5Porciento() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
                 .conDireccion("Calle 54 # 90 - 45")
@@ -457,8 +447,7 @@ class PedidoTest {
     @Test
     void deberiaCrearElPedidoCorrectamenteConDiferentesProductosYDescuentoPorDiaMes() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 20)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 20);
 
         PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
                 .conDireccion("Calle 54 # 90 - 45")

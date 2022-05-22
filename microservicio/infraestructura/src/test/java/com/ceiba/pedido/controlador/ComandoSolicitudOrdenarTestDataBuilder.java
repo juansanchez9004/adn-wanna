@@ -13,7 +13,7 @@ public class ComandoSolicitudOrdenarTestDataBuilder {
 
     private Long idCliente;
 
-    private Date fecha;
+    private LocalDate fecha;
 
     private ComandoPuntoEntrega comandoPuntoEntrega;
 
@@ -25,8 +25,7 @@ public class ComandoSolicitudOrdenarTestDataBuilder {
 
     public ComandoSolicitudOrdenarTestDataBuilder crearPorDefecto() {
         this.idCliente = 1l;
-        this.fecha = Date.from(LocalDate.of(2022, 5, 17)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        this.fecha = LocalDate.of(2022, 5, 17);
         this.comandoPuntoEntrega = new ComandoPuntoEntrega("Calle 5c - 2 sur # 345", "Medellin");
         this.comandoProductosOrdenados.add(new ComandoProductoOrdenar(1l, 3));
         this.comandoProductosOrdenados.add(new ComandoProductoOrdenar(2l, 2));

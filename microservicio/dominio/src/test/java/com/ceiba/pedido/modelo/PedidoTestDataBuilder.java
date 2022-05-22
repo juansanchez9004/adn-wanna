@@ -20,7 +20,7 @@ public class PedidoTestDataBuilder {
 
     private Long id;
     private Cliente cliente;
-    private Date fecha;
+    private LocalDate fecha;
     private PuntoEntrega puntoEntrega;
     private BigDecimal valorTotal;
     private BigDecimal valorSubTotal;
@@ -41,7 +41,7 @@ public class PedidoTestDataBuilder {
                                     .conId(10L)
                                     .conValorTotal(BigDecimal.valueOf(855000))
                                     .reconstruir());
-        this.fecha = Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        this.fecha = LocalDate.now();
         this.puntoEntrega = new PuntoEntregaTestDataBuilder().conPuntoEntregaPorDefecto().reconstruir();
         this.valorTotal = BigDecimal.valueOf(1677000);
         this.estado = EstadoPedido.PENDIENTE;
@@ -58,7 +58,7 @@ public class PedidoTestDataBuilder {
         return this;
     }
 
-    public PedidoTestDataBuilder conFecha(Date fecha) {
+    public PedidoTestDataBuilder conFecha(LocalDate fecha) {
         this.fecha = fecha;
         return this;
     }

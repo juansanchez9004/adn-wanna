@@ -21,8 +21,7 @@ class ServicioEntregarTest {
     @Test
     void deberiaEntregarPedidoExitosamente() {
 
-        Date fechaPedido = Date.from(LocalDate.of(2022, 5, 19)
-                .atStartOfDay(ZoneId.systemDefault()).toInstant());
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
 
         PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
                 .conDireccion("Calle 54 # 90 - 45")

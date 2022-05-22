@@ -5,6 +5,7 @@ import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.modelo.entidad.PuntoEntrega;
 import com.ceiba.pedido.modelo.entidad.SolicitudOrdenar;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +14,7 @@ public class SolicitudOrdenarTestDataBuilder {
 
     private Cliente cliente;
 
-    private Date fecha;
+    private LocalDate fecha;
 
     private PuntoEntrega puntoEntrega;
     private List<ProductoOrdenado> productosOrdenados;
@@ -27,7 +28,7 @@ public class SolicitudOrdenarTestDataBuilder {
         return this;
     }
 
-    public SolicitudOrdenarTestDataBuilder conFecha(Date fecha) {
+    public SolicitudOrdenarTestDataBuilder conFecha(LocalDate fecha) {
         this.fecha = fecha;
         return this;
     }
