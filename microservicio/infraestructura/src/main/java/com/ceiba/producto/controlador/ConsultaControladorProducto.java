@@ -1,6 +1,5 @@
 package com.ceiba.producto.controlador;
 
-import com.ceiba.pedido.modelo.dto.ResumenPedidoDTO;
 import com.ceiba.producto.consulta.ManejadorConsultarProductosTodos;
 import com.ceiba.producto.modelo.dto.ProductoDTO;
 import io.swagger.v3.oas.annotations.Operation;

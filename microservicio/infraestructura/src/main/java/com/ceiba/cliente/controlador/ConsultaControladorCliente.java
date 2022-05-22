@@ -2,7 +2,6 @@ package com.ceiba.cliente.controlador;
 
 import com.ceiba.cliente.consulta.ManejadorConsultarClientesTodos;
 import com.ceiba.cliente.modelo.dto.ClienteDTO;
-import com.ceiba.pedido.modelo.dto.ResumenPedidoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
