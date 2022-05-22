@@ -1,9 +1,8 @@
 package com.ceiba.pedido.controlador;
 
-import com.ceiba.comando.ComandoProductoOrdenar;
-import com.ceiba.comando.ComandoPuntoEntrega;
-import com.ceiba.comando.ComandoSolicitudOrdenar;
-
+import com.ceiba.pedido.comando.ComandoProductoOrdenar;
+import com.ceiba.pedido.comando.ComandoPuntoEntrega;
+import com.ceiba.pedido.comando.ComandoSolicitudOrdenar;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;

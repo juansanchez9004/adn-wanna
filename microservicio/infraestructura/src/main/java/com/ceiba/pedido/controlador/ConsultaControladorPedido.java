@@ -1,6 +1,6 @@
 package com.ceiba.pedido.controlador;
 
-import com.ceiba.consulta.ManejadorConsultarPedidosEntregados;
+import com.ceiba.pedido.consulta.ManejadorConsultarPedidosEntregados;
 import com.ceiba.pedido.modelo.dto.ResumenPedidoDTO;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

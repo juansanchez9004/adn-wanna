@@ -2,7 +2,7 @@ package com.ceiba.pedido.adaptador.repositorio;
 
 import com.ceiba.infraestructura.jdbc.MapperResult;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
-import com.ceiba.producto.puerto.RepositorioProducto;
+import com.ceiba.producto.puerto.repositorio.RepositorioProducto;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

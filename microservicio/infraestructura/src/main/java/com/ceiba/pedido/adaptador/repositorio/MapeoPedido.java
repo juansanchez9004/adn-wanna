@@ -1,6 +1,6 @@
 package com.ceiba.pedido.adaptador.repositorio;
 
-import com.ceiba.cliente.puerto.RepositorioCliente;
+import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
 import com.ceiba.infraestructura.jdbc.MapperResult;
 import com.ceiba.pedido.modelo.entidad.EstadoPedido;
 import com.ceiba.pedido.modelo.entidad.Pedido;

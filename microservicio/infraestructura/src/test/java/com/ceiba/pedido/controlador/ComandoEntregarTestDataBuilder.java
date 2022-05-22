@@ -1,9 +1,6 @@
 package com.ceiba.pedido.controlador;
 
-import com.ceiba.comando.ComandoEntregar;
-import com.ceiba.comando.ComandoProductoOrdenar;
-import com.ceiba.comando.ComandoPuntoEntrega;
-import com.ceiba.comando.ComandoSolicitudOrdenar;
+import com.ceiba.pedido.comando.ComandoEntregar;
 
 public class ComandoEntregarTestDataBuilder {
 
