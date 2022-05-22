@@ -1,7 +1,7 @@
 package com.ceiba.cliente.adaptador.repositorio;
 
-import com.ceiba.cliente.entidad.Cliente;
-import com.ceiba.cliente.puerto.RepositorioCliente;
+import com.ceiba.cliente.modelo.entidad.Cliente;
+import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
 import com.ceiba.infraestructura.jdbc.CustomNamedParameterJdbcTemplate;
 import com.ceiba.infraestructura.jdbc.EjecucionBaseDeDatos;
 import com.ceiba.infraestructura.jdbc.sqlstatement.SqlStatement;
