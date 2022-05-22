@@ -1,8 +1,8 @@
 package com.ceiba.producto.adaptador.repositorio;
 
 import com.ceiba.infraestructura.jdbc.MapperResult;
-import com.ceiba.producto.entidad.Producto;
-import com.ceiba.producto.entidad.TipoProducto;
+import com.ceiba.producto.modelo.entidad.Producto;
+import com.ceiba.producto.modelo.entidad.TipoProducto;
 import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;

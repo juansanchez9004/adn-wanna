@@ -1,7 +1,7 @@
 package com.ceiba.producto;
 
-import com.ceiba.producto.entidad.Producto;
-import com.ceiba.producto.entidad.TipoProducto;
+import com.ceiba.producto.modelo.entidad.Producto;
+import com.ceiba.producto.modelo.entidad.TipoProducto;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.ceiba.producto.entidad;
+package com.ceiba.producto.modelo.entidad;
 
 public enum TipoProducto {
 
