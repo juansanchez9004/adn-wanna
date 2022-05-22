@@ -140,6 +140,7 @@ public final class Pedido {
     public static Pedido reconstruir(Long id, LocalDate fecha, Cliente cliente, PuntoEntrega puntoEntrega, List<ProductoOrdenado> productosOrdenados, BigDecimal valorTotal, EstadoPedido estadoPedido) {
         ValidadorArgumento.validarObligatorio(id, "El id es requerido para ordenar");
         ValidadorArgumento.validarObligatorio(cliente, "El cliente es requerido para ordenar");
+        ValidadorArgumento.validarObligatorio(puntoEntrega, "El punto de entrega es requerido para ordenar");
         ValidadorArgumento.validarNoVacio(productosOrdenados, "No se puede crear un pedido sin productos");
         if(valorTotal.compareTo(BigDecimal.ZERO) <= 0) {
             throw new ExcepcionValorInvalido("El total a pagar no puede ser menor a cero");

@@ -3,9 +3,7 @@ package com.ceiba.pedido.modelo.entidad;
 import com.ceiba.cliente.modelo.entidad.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @Getter
