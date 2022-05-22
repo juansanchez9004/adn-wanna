@@ -1,7 +1,7 @@
 package com.ceiba.pedido.modelo;
 
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
-import com.ceiba.producto.entidad.Producto;
+import com.ceiba.producto.modelo.entidad.Producto;
 
 import java.math.BigDecimal;
 

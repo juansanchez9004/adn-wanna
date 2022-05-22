@@ -1,6 +1,6 @@
 package com.ceiba.pedido.servicio;
 
-import com.ceiba.cliente.entidad.Cliente;
+import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.modelo.entidad.PuntoEntrega;
 import com.ceiba.pedido.modelo.entidad.SolicitudOrdenar;

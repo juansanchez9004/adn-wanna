@@ -1,13 +1,13 @@
-package com.ceiba.comando.fabrica;
+package com.ceiba.pedido.comando.fabrica;
 
 import com.ceiba.cliente.puerto.repositorio.RepositorioCliente;
-import com.ceiba.comando.ComandoProductoOrdenar;
-import com.ceiba.comando.ComandoPuntoEntrega;
-import com.ceiba.comando.ComandoSolicitudOrdenar;
+import com.ceiba.pedido.comando.ComandoProductoOrdenar;
+import com.ceiba.pedido.comando.ComandoPuntoEntrega;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.modelo.entidad.PuntoEntrega;
 import com.ceiba.pedido.modelo.entidad.SolicitudOrdenar;
 import com.ceiba.producto.puerto.repositorio.RepositorioProducto;
+import com.ceiba.pedido.comando.ComandoSolicitudOrdenar;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

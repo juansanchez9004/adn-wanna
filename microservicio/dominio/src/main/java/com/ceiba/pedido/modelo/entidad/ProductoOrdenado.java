@@ -1,7 +1,7 @@
 package com.ceiba.pedido.modelo.entidad;
 
 import com.ceiba.dominio.ValidadorArgumento;
-import com.ceiba.producto.entidad.Producto;
+import com.ceiba.producto.modelo.entidad.Producto;
 
 import java.math.BigDecimal;
 

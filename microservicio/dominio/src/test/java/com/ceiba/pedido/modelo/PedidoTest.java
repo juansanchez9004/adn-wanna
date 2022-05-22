@@ -2,14 +2,14 @@ package com.ceiba.pedido.modelo;
 
 import com.ceiba.BasePrueba;
 import com.ceiba.cliente.ClienteTestDataBuilder;
-import com.ceiba.cliente.entidad.Cliente;
+import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.pedido.modelo.entidad.EstadoPedido;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;
 import com.ceiba.pedido.modelo.entidad.PuntoEntrega;
 import com.ceiba.producto.ProductoTestDataBuilder;
-import com.ceiba.producto.entidad.TipoProducto;
+import com.ceiba.producto.modelo.entidad.TipoProducto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

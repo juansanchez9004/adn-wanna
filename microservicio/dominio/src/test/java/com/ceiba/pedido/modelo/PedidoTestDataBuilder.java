@@ -1,7 +1,7 @@
 package com.ceiba.pedido.modelo;
 
 import com.ceiba.cliente.ClienteTestDataBuilder;
-import com.ceiba.cliente.entidad.Cliente;
+import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.pedido.modelo.entidad.EstadoPedido;
 import com.ceiba.pedido.modelo.entidad.Pedido;
 import com.ceiba.pedido.modelo.entidad.ProductoOrdenado;

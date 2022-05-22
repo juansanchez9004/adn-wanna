@@ -1,6 +1,6 @@
-package com.ceiba.comando.manejador;
+package com.ceiba.pedido.comando.manejador;
 
-import com.ceiba.comando.ComandoEntregar;
+import com.ceiba.pedido.comando.ComandoEntregar;
 import com.ceiba.manejador.ManejadorComando;
 import com.ceiba.pedido.puerto.repositorio.RepositorioPedido;
 import com.ceiba.pedido.servicio.ServicioEntregar;

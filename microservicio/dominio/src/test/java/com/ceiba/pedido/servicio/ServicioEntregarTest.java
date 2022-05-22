@@ -1,8 +1,6 @@
 package com.ceiba.pedido.servicio;
 
 import com.ceiba.BasePrueba;
-import com.ceiba.cliente.ClienteTestDataBuilder;
-import com.ceiba.cliente.entidad.Cliente;
 import com.ceiba.dominio.excepcion.ExcepcionValorObligatorio;
 import com.ceiba.pedido.modelo.PedidoTestDataBuilder;
 import com.ceiba.pedido.modelo.PuntoEntregaTestDataBuilder;

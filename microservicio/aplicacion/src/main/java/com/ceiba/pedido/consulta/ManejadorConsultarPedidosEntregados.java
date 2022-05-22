@@ -1,4 +1,4 @@
-package com.ceiba.consulta;
+package com.ceiba.pedido.consulta;
 
 import com.ceiba.pedido.modelo.dto.ResumenPedidoDTO;
 import com.ceiba.pedido.puerto.dao.DaoPedido;

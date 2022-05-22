@@ -1,6 +1,6 @@
 package com.ceiba.pedido.modelo.entidad;
 
-import com.ceiba.cliente.entidad.Cliente;
+import com.ceiba.cliente.modelo.entidad.Cliente;
 import com.ceiba.dominio.DescomponerFecha;
 import com.ceiba.dominio.ValidadorArgumento;
 import com.ceiba.dominio.excepcion.ExcepcionValorInvalido;
