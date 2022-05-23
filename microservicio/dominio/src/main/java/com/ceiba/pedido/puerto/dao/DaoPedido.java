@@ -7,4 +7,6 @@ import java.util.List;
 public interface DaoPedido {
 
     List<ResumenPedidoDTO> obtenerResumenDePedidosEntregados();
+
+    List<ResumenPedidoDTO> obtenerResumenDePedidosPendientes();
 }

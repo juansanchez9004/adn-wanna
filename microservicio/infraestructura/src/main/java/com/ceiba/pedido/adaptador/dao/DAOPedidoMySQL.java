@@ -18,6 +18,9 @@ public class DAOPedidoMySQL implements DaoPedido {
     @SqlStatement(namespace = "pedido", value = "obtenerentregados")
     private static String sqlObtenerEntregados;
 
+    @SqlStatement(namespace = "pedido", value = "obtenerpendientes")
+    private static String sqlObtenerPendientes;
+
     public DAOPedidoMySQL(CustomNamedParameterJdbcTemplate customNamedParameterJdbcTemplate,
                           MapeoPedidoResumen mapeoPedidoResumen) {
         this.customNamedParameterJdbcTemplate = customNamedParameterJdbcTemplate;
@@ -28,5 +31,11 @@ public class DAOPedidoMySQL implements DaoPedido {
     public List<ResumenPedidoDTO> obtenerResumenDePedidosEntregados() {
         return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
                 .query(sqlObtenerEntregados, mapeoPedidoResumen);
+    }
+
+    @Override
+    public List<ResumenPedidoDTO> obtenerResumenDePedidosPendientes() {
+        return this.customNamedParameterJdbcTemplate.getNamedParameterJdbcTemplate()
+                .query(sqlObtenerPendientes, mapeoPedidoResumen);
     }
 }
