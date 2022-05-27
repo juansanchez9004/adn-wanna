@@ -12,6 +12,7 @@ import com.ceiba.producto.ProductoTestDataBuilder;
 import com.ceiba.producto.modelo.entidad.TipoProducto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -282,6 +283,41 @@ class PedidoTest {
     }
 
     @Test
+    void calcularCostoDescuentoDiasSemanaPerfumeConValoresDeProductosNegativos() {
+
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 26);
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 88 # 90 - 41")
+                .conMunicipio("Barbosa")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeAmber = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(2)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(-30000))
+                        .conTipoProducto(TipoProducto.PERFUME).conNombre("Amber Out Edition Golden")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoPerfumeAmber)
+                .crear();
+
+        var costoDescuentoDiasSemanaPerfume = pedido.calcularCostoDescuentoDiasSemanaPerfume(pedido.getProductosOrdenados());
+
+        Assertions.assertEquals(BigDecimal.ZERO, costoDescuentoDiasSemanaPerfume);
+    }
+
+    @Test
     void deberiaReconstruirElPedidoConEstadoCanceladoExitosamente() {
 
         LocalDate fechaPedido = LocalDate.of(2022, 5, 19);
@@ -356,7 +392,7 @@ class PedidoTest {
         Assertions.assertEquals(cliente, pedido.getCliente());
         Assertions.assertEquals(productoOrdenadoTipoPerfume, pedido.getProductosOrdenados().get(0));
         Assertions.assertEquals(715000L, pedido.getValorTotal().longValue());
-        Assertions.assertTrue(pedido.esPendiente());
+        Assertions.assertFalse(pedido.esEntregado());
     }
 
     @Test
@@ -488,7 +524,35 @@ class PedidoTest {
         Assertions.assertEquals(productoOrdenadoTipoReloj, pedido.getProductosOrdenados().get(0));
         Assertions.assertEquals(productoOrdenadoTipoPerfume, pedido.getProductosOrdenados().get(1));
         Assertions.assertEquals(1058400L, pedido.getValorTotal().longValue());
-        Assertions.assertTrue(pedido.esPendiente());
+        Assertions.assertFalse(pedido.esCancelado());
+    }
+
+    @Test
+    void deberiaCrearPedidoConValorDomicilioComunCuandoSubtotalEsIgualAlTopeCompraParaDescuento() {
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 26);
+
+        var producto = new ProductoTestDataBuilder()
+                .conProductoPorDefecto()
+                .conValor(BigDecimal.valueOf(600000))
+                .reconstruir();
+
+        var productoOrdenado = new ProductoOrdenadoTestDataBuilder()
+                .conProducto(producto)
+                .conCantidad(2)
+                .conValorTotal(BigDecimal.valueOf(1200000))
+                .reconstruir();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(new ClienteTestDataBuilder()
+                        .conClientePorDefecto()
+                        .reconstruir())
+                .conPuntoEntrega(new PuntoEntregaTestDataBuilder()
+                        .conPuntoEntregaPorDefecto()
+                        .reconstruir())
+                .conProducto(productoOrdenado)
+                .crear();
+
+        Assertions.assertEquals(BigDecimal.valueOf(1320000.0), pedido.getValorTotal());
     }
 
     @Test
@@ -562,6 +626,7 @@ class PedidoTest {
 
         pedido.entregar();
 
-        Assertions.assertTrue(pedido.esEntregado());
+        Assertions.assertFalse(pedido.esPendiente());
+        Assertions.assertFalse(pedido.esCancelado());
     }
 }
