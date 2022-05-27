@@ -15,7 +15,7 @@ public class MapeoPedidoResumen implements RowMapper<ResumenPedidoDTO>, MapperRe
     @Override
     public ResumenPedidoDTO mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         var id = resultSet.getLong("id");
-        var fecha = resultSet.getDate("fecha");
+        var fecha = resultSet.getDate("fecha").toLocalDate();
         var puntoEntrega = resultSet.getString("punto_entrega");
         var valorTotal = resultSet.getBigDecimal("valor_total");
         var estado = EstadoPedido.valueOf(resultSet.getString("estado"));
