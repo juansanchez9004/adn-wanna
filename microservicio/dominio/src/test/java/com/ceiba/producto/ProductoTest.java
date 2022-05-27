@@ -27,6 +27,36 @@ class ProductoTest {
     }
 
     @Test
+    void deberiaReconstruirProductoTipoComestico() {
+
+        var producto = new ProductoTestDataBuilder()
+                .conId(10l)
+                .conNombre("Kit de limpieza facial")
+                .conTipoProducto(TipoProducto.COSMETICO)
+                .conValor(BigDecimal.valueOf(35500))
+                .reconstruir();
+
+        Assertions.assertTrue(producto.esTipoCosmetico());
+        Assertions.assertFalse(producto.esTipoReloj());
+        Assertions.assertEquals(BigDecimal.valueOf(35500), producto.getValor());
+    }
+
+    @Test
+    void deberiaReconstruirProductoTipoReloj() {
+
+        var producto = new ProductoTestDataBuilder()
+                .conId(19l)
+                .conNombre("Fossil Dating Square")
+                .conTipoProducto(TipoProducto.RELOJ)
+                .conValor(BigDecimal.valueOf(35500))
+                .reconstruir();
+
+        Assertions.assertTrue(producto.esTipoReloj());
+        Assertions.assertFalse(producto.esTipoCosmetico());
+        Assertions.assertEquals(BigDecimal.valueOf(35500), producto.getValor());
+    }
+
+    @Test
     void reconstruirSinIdDeberiaLanzarError() {
         BasePrueba.assertThrows(() -> new ProductoTestDataBuilder()
                         .conNombre("Kit de limpieza facial")

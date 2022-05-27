@@ -607,6 +607,33 @@ class PedidoTest {
     }
 
     @Test
+    void reconstruirSinPuntoDeEntregaError() {
+        BasePrueba.assertThrows(() -> new PedidoTestDataBuilder()
+                        .conPedidoPorDefecto()
+                        .conPuntoEntrega(null)
+                        .reconstruir(), ExcepcionValorObligatorio.class,
+                "El punto de entrega es requerido para ordenar");
+    }
+
+    @Test
+    void reconstruirConValorTotalNegativoError() {
+        BasePrueba.assertThrows(() -> new PedidoTestDataBuilder()
+                        .conPedidoPorDefecto()
+                        .conValorTotal(BigDecimal.valueOf(-100000))
+                        .reconstruir(), ExcepcionValorInvalido.class,
+                "El total a pagar no puede ser menor a cero");
+    }
+
+    @Test
+    void reconstruirConValorTotalCeroError() {
+        BasePrueba.assertThrows(() -> new PedidoTestDataBuilder()
+                        .conPedidoPorDefecto()
+                        .conValorTotal(BigDecimal.valueOf(0))
+                        .reconstruir(), ExcepcionValorInvalido.class,
+                "El total a pagar no puede ser menor a cero");
+    }
+
+    @Test
     void reconstruirConValorTotalMenorACeroDeberiaLanzarError() {
         BasePrueba.assertThrows(() -> new PedidoTestDataBuilder()
                         .conPedidoPorDefecto()
