@@ -283,9 +283,9 @@ class PedidoTest {
     }
 
     @Test
-    void calcularCostoDescuentoDiasSemanaPerfumeConValoresDeProductosNegativos() {
+    void aplicaCostoDescuentoDiasSemanaPerfume() {
 
-        LocalDate fechaPedido = LocalDate.of(2022, 5, 26);
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 24);
 
         Cliente cliente = new ClienteTestDataBuilder()
                 .conClientePorDefecto()
@@ -300,7 +300,77 @@ class PedidoTest {
                 .conCantidad(2)
                 .conProducto(new ProductoTestDataBuilder()
                         .conProductoPorDefecto()
-                        .conValor(BigDecimal.valueOf(-30000))
+                        .conValor(BigDecimal.valueOf(30000))
+                        .conTipoProducto(TipoProducto.PERFUME).conNombre("Amber Out Edition Golden")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoPerfumeAmber)
+                .crear();
+
+        var costoDescuentoDiasSemanaPerfume = pedido.calcularCostoDescuentoDiasSemanaPerfume(pedido.getProductosOrdenados());
+
+        Assertions.assertEquals(3000L, costoDescuentoDiasSemanaPerfume.longValue());
+    }
+
+    @Test
+    void noAplicaCostoDescuentoDiasSemanaPerfumePorNoSerPerfume() {
+
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 24);
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 88 # 90 - 41")
+                .conMunicipio("Barbosa")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeAmber = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(1)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(600000))
+                        .conTipoProducto(TipoProducto.RELOJ).conNombre("FOSSIL BLUE")
+                        .reconstruir())
+                .build();
+
+        var pedido = new PedidoTestDataBuilder()
+                .conCliente(cliente)
+                .conFecha(fechaPedido)
+                .conPuntoEntrega(puntoEntrega)
+                .conProducto(productoOrdenadoTipoPerfumeAmber)
+                .crear();
+
+        var costoDescuentoDiasSemanaPerfume = pedido.calcularCostoDescuentoDiasSemanaPerfume(pedido.getProductosOrdenados());
+
+        Assertions.assertEquals(BigDecimal.ZERO, costoDescuentoDiasSemanaPerfume);
+    }
+
+    @Test
+    void noAplicaCostoDescuentoDiasSemanaPerfumePorNoSerDiaPermitido() {
+
+        LocalDate fechaPedido = LocalDate.of(2022, 5, 28);
+
+        Cliente cliente = new ClienteTestDataBuilder()
+                .conClientePorDefecto()
+                .reconstruir();
+
+        PuntoEntrega puntoEntrega = new PuntoEntregaTestDataBuilder()
+                .conDireccion("Calle 88 # 90 - 41")
+                .conMunicipio("Barbosa")
+                .reconstruir();
+
+        ProductoOrdenado productoOrdenadoTipoPerfumeAmber = new ProductoOrdenadoTestDataBuilder()
+                .conCantidad(1)
+                .conProducto(new ProductoTestDataBuilder()
+                        .conProductoPorDefecto()
+                        .conValor(BigDecimal.valueOf(600000))
                         .conTipoProducto(TipoProducto.PERFUME).conNombre("Amber Out Edition Golden")
                         .reconstruir())
                 .build();
